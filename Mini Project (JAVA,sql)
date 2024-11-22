@@ -1,0 +1,27 @@
+import java.sql.*;
+
+public class VehicleManagementSystem {
+    public static void main(String[] args) {
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/vehicle_management";
+        String user = "root";
+        String password = "your_password";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            // SQL query examples
+            String query1 = "SELECT * FROM vehicles";
+            String query2 = "INSERT INTO vehicles (make, model, year) VALUES (?, ?, ?)";
+
+            // Prepared statement for efficient and secure queries
+            PreparedStatement stmt = conn.prepareStatement(query2);
+            stmt.setString(1, "Toyota");
+            stmt.setString(2, "Camry");
+            stmt.setInt(3, 2023);
+            stmt.executeUpdate();
+
+            // ... more SQL operations ...
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
